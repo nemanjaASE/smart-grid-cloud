@@ -34,8 +34,8 @@ A cloud-native system for monitoring and early risk detection in power grids, ba
 - [Local Environment Setup](#local-environment-setup)
   - [Infrastructure Initialization](#infrastructure-initialization-tools-project)
   - [Running the Backend](#running-the-backend)
-  - [Running the Dashboard](#running-the-dashboard)
   - [Running the Inverter Simulator](#running-the-inverter-simulator)
+  - [Running the Dashboard](#running-the-dashboard)
   - [Deployment to Azure](#deployment-to-azure)
 
 ---
