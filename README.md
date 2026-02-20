@@ -55,7 +55,7 @@ The system is built following the principles of **Clean Architecture** and **Dom
 | **Infrastructure** (Technical Details) | Implements interfaces for data persistence (Azure Table Storage), file storage (Blob Storage), and messaging (Queue Storage). |
 | **Presentation** (Entry Point) | Azure Functions and an ASP.NET Core Web API that expose functionalities to clients. |
 
-<img width="1708" height="962" alt="Clean Architecture Folder Structure" src="https://github.com/user-attachments/assets/11d0ef60-4078-4e01-a45f-c3f3e26dfa55" />
+![Clean Architecture](./images/clean-architecture.png)
 
 ---
 
@@ -86,7 +86,7 @@ The system is built following the principles of **Clean Architecture** and **Dom
 
 The system is architected into four main layers, ensuring scalability and real-time responsiveness.
 
-![System Architecture Diagram](https://github.com/user-attachments/assets/441dfe94-d771-44aa-aa88-51e9828fd57c)
+![System Architecture Diagram](./images/system-architecture.jpg)
 
 ### 🔌 Inverter Telemetry Simulator
 
@@ -222,7 +222,7 @@ Update the appsettings.json file in your Web API project. This configuration all
 
 Before starting the Azure Functions or the Web API, you must initialize the storage resources in your local emulator (Azurite) or Azure account. This is done via the **Tools** console application.
 
-<img width="2324" height="808" alt="Screenshot 2026-02-20 102156" src="https://github.com/user-attachments/assets/445b943d-3124-4df5-8381-54307ea36ade" />
+![Infrastructure](./images/infrastructure.png)
 
 ---
 
@@ -234,10 +234,10 @@ Before starting the Azure Functions or the Web API, you must initialize the stor
    - The Azure Functions Core Tools console will open, listing all detected function endpoints (e.g., `ReceiveTelemetry`, `GridMonitor`).
    - The Web API will start, hosting the SignalR Hub and REST endpoints.
 
-<img width="2316" height="1176" alt="Screenshot 2026-02-20 102519" src="https://github.com/user-attachments/assets/857ea1eb-df68-49bf-8d7f-11a83672ec1b" />
+![Console Tool](./images/console-tool.png)
 
 
-<img width="2332" height="670" alt="Screenshot 2026-02-20 102720" src="https://github.com/user-attachments/assets/8be6ddc8-e927-422a-9343-d384cb51d4b4" />
+![Web Api](./images/web-api.png)
 
 ---
 
@@ -247,7 +247,7 @@ Before starting the Azure Functions or the Web API, you must initialize the stor
 2. Follow the prompts to register a device — enter `DeviceName`, `NominalPower`, `DeviceType` (Solar Panel or Wind Turbine), and `Location`.
 3. Once registered, the simulator enters a loop, sending telemetry data every **10 seconds** to the cloud.
 
-<img width="2332" height="1002" alt="Screenshot 2026-02-20 103916" src="https://github.com/user-attachments/assets/c2281219-8abe-4b8c-93bf-25313fdf4990" />
+![Console Simulator](./images/console-simulator.png)
 
 ---
 
@@ -264,11 +264,11 @@ Before starting the Azure Functions or the Web API, you must initialize the stor
    ```
 4. The dashboard will be available at the address shown in the terminal (typically `http://localhost:5173`).
 
-<img width="1430" height="748" alt="Picture2" src="https://github.com/user-attachments/assets/9729244d-482d-4269-8505-a3f61de40e7c" />
+![Dashboard](./images/dashboard.png)
 
-<img width="1430" height="747" alt="Picture1" src="https://github.com/user-attachments/assets/99f1f553-5b5e-446a-ace0-b2b9bbf6c15b" />
+![Devices](./images/devices.png)
 
-<img width="1430" height="747" alt="Picture3" src="https://github.com/user-attachments/assets/3443d096-a696-4144-a0f5-56af4663963e" />
+![Firmware](./images/firmware.png)
 
 ---
 
