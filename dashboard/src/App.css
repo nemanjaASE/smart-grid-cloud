@@ -1,0 +1,16 @@
+/* App.css */
+#root {
+  /* Ovo uklanja ograničenje širine i postavlja boju pozadine na nivou cele aplikacije */
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #020617; /* Tvoja tamna boja */
+}
+
+/* Ako imaš bilo kakav body reset u index.css, ovo će ga pregaziti */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #020617;
+}
