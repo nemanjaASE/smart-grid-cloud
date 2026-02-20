@@ -21,22 +21,26 @@ A cloud-native system for monitoring and early risk detection in power grids, ba
 ---
 
 ## 📋 Table of Contents
-
-- [System Architecture](#system-architecture)
-- [Technologies](#technologies)
-- [System Components](#system-components)
-  - [Inverter Telemetry Simulator](#inverter-telemetry-simulator)
-  - [Azure Functions – Serverless Backend](#azure-functions--serverless-backend)
-  - [Web API & Background Worker](#web-api--background-worker)
-  - [Dashboard](#dashboard)
-- [Clean Code Principles](#clean-code-principles)
-- [Prerequisites](#prerequisites)
-- [Local Environment Setup](#local-environment-setup)
+- [System Architecture](#-system-architecture)
+- [Technologies](#-technologies)
+  - [Core Framework](#core-framework)
+  - [Cloud Infrastructure](#cloud-infrastructure-microsoft-azure)
+  - [Patterns & Validation](#patterns--validation)
+- [System Components](#-system-components)
+  - [Inverter Telemetry Simulator](#-inverter-telemetry-simulator)
+  - [Azure Functions – Serverless Backend](#-azure-functions--serverless-backend)
+  - [Web API & Background Worker](#-web-api--background-worker)
+  - [Dashboard](#-dashboard)
+- [Clean Code Principles](#-clean-code-principles)
+- [Prerequisites](#-prerequisites)
+- [Local Environment Setup](#-local-environment-setup)
   - [Infrastructure Initialization](#infrastructure-initialization-tools-project)
   - [Running the Backend](#running-the-backend)
   - [Running the Inverter Simulator](#running-the-inverter-simulator)
   - [Running the Dashboard](#running-the-dashboard)
   - [Deployment to Azure](#deployment-to-azure)
+- [License](#-license)
+- [Contributing](#-contributing)
 
 ---
 
