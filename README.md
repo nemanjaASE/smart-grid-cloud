@@ -276,4 +276,16 @@ Before starting the Azure Functions or the Web API, you must initialize the stor
 
 ---
 
-*This project was developed for academic purposes as part of the "Cloud Application Development in Smart Grids" course exercises, 2025/2026.*
+## 📄 License
+
+This project is the intellectual property of the author. It is distributed under the **MIT License**. See the `LICENSE` file for more information.
+
+> **Note:** This system was designed and developed by the author as part of the "Cloud Application Development in Smart Grids" course at the Faculty of Technical Sciences, Novi Sad. While the project was created within an academic framework, all implementation details, architecture design, and source code are the sole property of the author.
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make the academic community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+---
