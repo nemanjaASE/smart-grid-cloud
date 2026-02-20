@@ -153,6 +153,67 @@ Before running the applications, configure the storage connection strings:
 - **Azure Functions project** – populate `local.settings.json` with your storage credentials (use `UseDevelopmentStorage=true` for local work).
 - **Web API project** – fill `appsettings.json` with the corresponding `AzureOptions` configuration.
 
+A. **Azure Functions** (_local.settings.json_)
+Create or update the _local.settings.json_ file in the root of your Azure Functions project. This file configures the serverless runtime, trigger schedules, and connection details for all storage services (Table, Blob, and Queue).
+
+```
+ {
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "GridMonitorSchedule": "*/10 * * * * *",
+    "AzureTableOptions:ConnectionString": "UseDevelopmentStorage=true",
+    "AzureTableOptions:TelemetriesTable": "Telemetries",
+    "AzureTableOptions:DevicesTable": "Devices",
+    "AzureTableOptions:DeviceStatusesTable": "DeviceStatuses",
+    "AzureTableOptions:FirmwaresTable": "Firmwares",
+    "AzureBlobOptions:FirmwareBlob": "firmware-updates",
+    "AzureBlobOptions:ConnectionString": "UseDevelopmentStorage=true",
+    "AzureQueueOptions:AlertQueue": "alert-queue",
+    "AzureQueueOptions:DeviceStatusQueue": "device-status-queue",
+    "AzureQueueOptions:ConnectionString": "UseDevelopmentStorage=true",
+    "ParallelSettings:MaxDegreeOfParallelism": 20
+  }
+}
+```
+
+B. **ASP.NET Core Web API** (_appsettings.json_)
+Update the appsettings.json file in your Web API project. This configuration allows the Web API to host the SignalR Hub, manage CORS for the Dashboard, and enables the Background Worker to poll the status queue.
+
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "WebApi": {
+    "CorsPolicyName": "_reactAppPolicy",
+    "ReactOrigin": "http://localhost:5173",
+    "DeviceHubRoute": "/device-status-hub"
+  },
+  "AzureQueueOptions": {
+    "ConnectionString": "UseDevelopmentStorage=true",
+    "DeviceStatusQueue": "device-status-queue"
+  },
+  "AzureTableOptions": {
+    "ConnectionString": "UseDevelopmentStorage=true",
+    "DevicesTable": "Devices",
+    "FirmwaresTable": "Firmwares",
+    "DeviceStatusesTable": "DeviceStatuses"
+  },
+  "AzureBlobOptions": {
+    "ConnectionString": "UseDevelopmentStorage=true",
+    "FirmwareBlob": "firmware-updates"
+  },
+  "ParallelSettings": {
+    "MaxDegreeOfParallelism": 20
+  }
+}
+```
 ### Infrastructure Initialization (Tools Project)
 
 Before starting the Azure Functions or the Web API, you must initialize the storage resources in your local emulator (Azurite) or Azure account. This is done via the **Tools** console application.
