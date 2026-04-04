@@ -99,11 +99,13 @@ The system is architected into four main layers, ensuring scalability and real-t
 
 ### ⚡ Azure Functions – Serverless Backend
 
+![Azure Functions](./images/azure-functions.png)
+
 Acts as the event-driven core of the system, processing data through various triggers:
 
 | Function | Trigger | Description |
 |---|---|---|
-| **ReceiveTelemetry** | HTTP | Ingests raw data, calculates load percentages, and triggers downstream processing. |
+| **ReceiveTelemetry, ReceiveDevice, ReceiveFirmware** | HTTP | Ingests raw data, calculates load percentages, and triggers downstream processing. |
 | **GridMonitor** | Timer (10s) | Performs periodic health checks to detect anomalies like grid overloads or offline devices. |
 | **FirmwareProcessor** | Blob | Automates the OTA update flow whenever a new firmware binary is uploaded. |
 | **ProcessAlerts** | Queue | Decouples critical alarm logging and processing from the main data ingestion flow. |
