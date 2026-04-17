@@ -12,7 +12,11 @@ export const FirmwareUploadModal: React.FC<FirmwareUploadModalProps> = ({
   open,
   onClose,
 }) => {
-  const [firmware, setFirmware] = useState<Partial<FirmwareUploadRequest>>({});
+  const [firmware, setFirmware] = useState<FirmwareUploadRequest>({
+    deviceType: "",
+    version: "",
+    firmwareFile: null as unknown as File,
+  });
   const [error, setError] = useState("");
   const [isUploading, setIsUploading] = useState(false);
 
@@ -50,7 +54,11 @@ export const FirmwareUploadModal: React.FC<FirmwareUploadModalProps> = ({
   };
 
   const handleClose = () => {
-    setFirmware({});
+    setFirmware({
+      deviceType: "",
+      version: "",
+      firmwareFile: null as unknown as File,
+    });
     setError("");
     setIsUploading(false);
     onClose();
@@ -143,7 +151,7 @@ export const FirmwareUploadModal: React.FC<FirmwareUploadModalProps> = ({
             disabled={isUploading}
             className="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold shadow-lg shadow-indigo-500/20"
           >
-            Upload
+            {isUploading ? "Uploading..." : "Upload"}
           </button>
         </div>
       </div>

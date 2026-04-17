@@ -10,8 +10,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "devices", element: <DevicesPage /> },
-      //   { path: "about", element: <AboutPage /> },
-      //   { path: "contact", element: <ContactPage /> },
     ],
   },
 ]);

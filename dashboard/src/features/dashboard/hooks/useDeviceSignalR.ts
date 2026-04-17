@@ -1,63 +1,57 @@
+import { useSignalR } from "./../../../shared/signalr/useSignalR";
 import { useEffect, useState } from "react";
-import * as signalR from "@microsoft/signalr";
+import { HubConnectionState } from "@microsoft/signalr";
+import { useLogger } from "../../../shared/logger/useLogger";
 import type { DeviceStatus } from "../models/DeviceStatus";
 import { getDeviceStatuses } from "../api/getDeviceStatuses";
 
-export const useDeviceSignalR = (hubUrl: string) => {
+export const useDeviceSignalR = (eventName: string) => {
+  const logger = useLogger();
+  const { connection, state } = useSignalR();
+
   const [devices, setDevices] = useState<DeviceStatus[]>([]);
-  const [connection, setConnection] = useState<signalR.HubConnection | null>(
-    null,
-  );
-  const [state, setState] = useState<"Connected" | "Connecting">("Connecting");
-
-  useEffect(() => {
-    getDeviceStatuses()
-      .then(setDevices)
-      .catch((err) => console.error("Failed to fetch devices: ", err));
-  }, []);
-
-  useEffect(() => {
-    const conn = new signalR.HubConnectionBuilder()
-      .withUrl(hubUrl)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(conn);
-  }, [hubUrl]);
 
   useEffect(() => {
     if (!connection) return;
 
-    const startConnection = async () => {
-      try {
-        await connection.start();
-        setState("Connected");
+    let isMounted = true;
 
-        connection.on("ReceiveStatusUpdate", (updatedDevice: DeviceStatus) => {
-          setDevices((prev) => {
-            const index = prev.findIndex(
-              (d) => d.deviceId === updatedDevice.deviceId,
-            );
-            if (index !== -1) {
-              const newDevices = [...prev];
-              newDevices[index] = updatedDevice;
-              return newDevices;
-            }
-            return [updatedDevice, ...prev];
-          });
-        });
+    const fetchInitialData = async () => {
+      try {
+        const initial = await getDeviceStatuses();
+        if (isMounted) {
+          setDevices(initial);
+          logger.info("Initial device statuses fetched.");
+        }
       } catch (err) {
-        console.error("SignalR start error:", err);
-        setState("Connecting");
+        logger.error("Failed to fetch initial devices.", { err });
       }
     };
 
-    startConnection();
+    if (state === HubConnectionState.Connected) {
+      fetchInitialData();
+    }
+    connection.on(eventName, (updatedDevice: DeviceStatus) => {
+      if (!isMounted) return;
+
+      setDevices((prev) => {
+        const index = prev.findIndex(
+          (d) => d.deviceId === updatedDevice.deviceId,
+        );
+        if (index !== -1) {
+          const newDevices = [...prev];
+          newDevices[index] = updatedDevice;
+          return newDevices;
+        }
+        return [updatedDevice, ...prev];
+      });
+    });
 
     return () => {
-      connection.stop();
+      isMounted = false;
+      connection.off(eventName);
     };
-  }, [connection]);
+  }, [connection, state, eventName, logger]);
 
   return { devices, state };
 };
